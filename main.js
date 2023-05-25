@@ -25,6 +25,7 @@ let layerControl = L.control.layers({
     "Wettervorhersage MET Norway": themaLayer.forecast.addTo(map)
 }).addTo(map);
 
+
 // Maßstab
 L.control.scale({
     imperial: false,
@@ -64,7 +65,7 @@ async function showForecast(url, latlng) {
         console.log(icon, image);
     }
 
-    L.popup().setLatLng(latlng).setContent(markup).openOn(map);
+    L.popup().setLatLng(latlng).setContent(markup).openOn(themaLayer.forecast);
 }
 
 // auf Kartenklick reagieren

@@ -51,7 +51,7 @@ async function showForecast(url, latlng) {
             <tr><td>Windrichtung (°)</td><td>${current.wind_from_direction}</td></tr>
             <tr><td>Windgeschwindigkeit (m/s)</td><td>${current.wind_speed}</td></tr>
 
-</table>
+        </table>
 
     `;
 
@@ -60,8 +60,7 @@ async function showForecast(url, latlng) {
         //console.log(timeseries[i]);
         let icon = timeseries[i].data.next_1_hours.summary.symbol_code;
         let image = `icons/${icon}.svg`;
-        markup += `<img src="${image}" style="width:32px;">`
-
+        markup += `<img src="${image}" style="width:32px;" title="${timeseries[i].time.toLocaleString()}">`
         console.log(icon, image);
     }
 
@@ -74,3 +73,7 @@ map.on("click", function(evt) {
     let url = `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${evt.latlng.lat}&lon=${evt.latlng.lng}`;
     showForecast(url, evt.latlng);
 });
+
+map.fireEvent("click", {
+    latlng: L.latLng(ibk.lat, ibk.lng)
+})
